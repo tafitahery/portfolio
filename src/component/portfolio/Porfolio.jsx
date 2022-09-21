@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PortfolioList from '../portfolioList/PortfolioList';
 import './portfolio.scss';
+import {
+  featuredPortfolio,
+  webPortfolio,
+  mobilePortfolio,
+  contentPortfolio,
+  designPortfolio,
+} from '../../data';
 
 export default function Porfolio() {
   const [selected, setSelected] = useState('featured');
+  const [data, setData] = useState([]);
 
   const list = [
     {
@@ -28,6 +36,28 @@ export default function Porfolio() {
     },
   ];
 
+  useEffect(() => {
+    switch (selected) {
+      case 'featured':
+        setData(featuredPortfolio);
+        break;
+      case 'web':
+        setData(webPortfolio);
+        break;
+      case 'mobile':
+        setData(mobilePortfolio);
+        break;
+      case 'design':
+        setData(designPortfolio);
+        break;
+      case 'content':
+        setData(contentPortfolio);
+        break;
+      default:
+        setData(featuredPortfolio);
+    }
+  }, [selected]);
+
   return (
     <div className="portfolio" id="portfolio">
       <h1>Portfolio</h1>
@@ -43,48 +73,12 @@ export default function Porfolio() {
         ))}
       </ul>
       <div className="container">
-        <div className="item">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/07/16/12/29/mockup-847643_960_720.jpg"
-            alt=""
-          />
-          <h3>Banking App</h3>
-        </div>
-        <div className="item">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/07/16/12/29/mockup-847643_960_720.jpg"
-            alt=""
-          />
-          <h3>Banking App</h3>
-        </div>
-        <div className="item">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/07/16/12/29/mockup-847643_960_720.jpg"
-            alt=""
-          />
-          <h3>Banking App</h3>
-        </div>
-        <div className="item">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/07/16/12/29/mockup-847643_960_720.jpg"
-            alt=""
-          />
-          <h3>Banking App</h3>
-        </div>
-        <div className="item">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/07/16/12/29/mockup-847643_960_720.jpg"
-            alt=""
-          />
-          <h3>Banking App</h3>
-        </div>
-        <div className="item">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/07/16/12/29/mockup-847643_960_720.jpg"
-            alt=""
-          />
-          <h3>Banking App</h3>
-        </div>
+        {data.map((d) => (
+          <div className="item" key={d.id}>
+            <img src={d.img} alt="" />
+            <h3>{d.title}</h3>
+          </div>
+        ))}
       </div>
     </div>
   );
