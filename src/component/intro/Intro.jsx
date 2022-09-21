@@ -15,7 +15,6 @@ export default function Intro() {
           <h1>Tafita Hery</h1>
           <h3>
             Freelance
-            <span> </span>
             <span>
               <Typewriter
                 options={{
