@@ -43,8 +43,15 @@
       }
       h3 {
         font-size: 30px;
+        display: flex;
+
+        span {
+          font-size: inherit;
+          color: crimson;
+        }
       }
     }
+
     a {
       position: absolute;
       bottom: 10px;
